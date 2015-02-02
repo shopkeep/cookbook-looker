@@ -11,4 +11,8 @@ describe 'looker::default' do
     expect(chef_run).to include_recipe('looker::_files')
   end
 
+  it 'Includes the looker::_service recipe' do
+    expect(chef_run).to include_recipe('looker::_service')
+  end
+
 end

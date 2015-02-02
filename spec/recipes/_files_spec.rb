@@ -1,6 +1,5 @@
 require_relative '../spec_helper'
 
-LOOKER_HOME = '/home/looker'
 
 describe 'looker::_files' do
   let(:chef_run) do 
@@ -18,7 +17,8 @@ describe 'looker::_files' do
   end
 
   it 'Places the looker startup script' do
-    expect(chef_run).to create_template_if_missing("#{LOOKER_HOME}/looker/looker").with(
+    expect(chef_run).to create_cookbook_file_if_missing("#{LOOKER_HOME}/looker/looker").with(
+      'source' => 'looker',
       'owner' => 'looker',
       'group' => 'looker',
       'mode' => 0750
@@ -34,7 +34,8 @@ describe 'looker::_files' do
   end
 
   it 'Places looker.jar' do
-    expect(chef_run).to create_template_if_missing("#{LOOKER_HOME}/looker/looker.jar").with(
+    expect(chef_run).to create_cookbook_file_if_missing("#{LOOKER_HOME}/looker/looker.jar").with(
+      'source' => 'looker.jar',
       'owner' => 'looker',
       'group' => 'looker',
       'mode' => 0750

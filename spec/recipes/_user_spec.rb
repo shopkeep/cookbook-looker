@@ -1,7 +1,5 @@
 require_relative '../spec_helper'
 
-LOOKER_HOME = '/home/looker'
-
 describe 'looker::_user' do
   let(:chef_run) do 
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|

@@ -15,7 +15,7 @@ directory "#{looker_home}/looker" do
   group 'looker'
 end
 
-template looker_init_script do
+cookbook_file looker_init_script do
   source 'looker'
   cookbook node['looker']['file_cookbook']
   owner 'looker'
@@ -24,14 +24,8 @@ template looker_init_script do
   action :create_if_missing
 end
 
-link "/etc/init.d/looker" do
-  owner 'looker'
-  group 'looker'
-  to looker_init_script
-end
-
-template "#{looker_home}/looker/looker.jar" do
-  source 'looker'
+cookbook_file "#{looker_home}/looker/looker.jar" do
+  source 'looker.jar'
   cookbook node['looker']['file_cookbook']
   owner 'looker'
   group 'looker'

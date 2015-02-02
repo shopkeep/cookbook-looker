@@ -6,4 +6,4 @@ description      'Installs/Configures looker'
 long_description 'Installs/Configures looker'
 version          '0.1.0'
 
-depends 's3_file'
+depends 'java'
