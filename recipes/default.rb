@@ -8,3 +8,4 @@
 #
 
 include_recipe 'looker::_user'
+include_recipe 'looker::_files'
