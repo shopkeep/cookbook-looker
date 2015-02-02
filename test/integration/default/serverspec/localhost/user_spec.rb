@@ -10,4 +10,9 @@ describe 'looker:_user' do
     it { should exist }
   end
 
+  describe file('/home/looker') do
+    it { should be_directory }
+    it { should be_owned_by 'looker' }
+    it { should be_grouped_into 'looker' }
+  end
 end
