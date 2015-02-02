@@ -4,7 +4,7 @@ TODO: Enter the cookbook description here.
 
 ## Supported Platforms
 
-TODO: List your supported platforms.
+Ubuntu 12.04, 14.04
 
 ## Attributes
 
