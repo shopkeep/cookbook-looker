@@ -9,7 +9,7 @@
 
 looker_run_dir = node['looker']['run_dir']
 
-directory node['looker']['run_dir'] do
+directory looker_run_dir do
   owner 'looker'
   group 'looker'
 end
