@@ -8,12 +8,9 @@
 #
 #
 
-looker_home = node['looker']['home']
-looker_run_dir = "#{looker_home}/looker"
+looker_cfg_file = "#{node['looker']['run_dir']}/lookerstart.cfg"
 
-looker_cfg = "#{looker_run_dir}/lookerstart.cfg"
-
-template looker_cfg do
+template looker_cfg_file do
   source 'lookerstart.cfg.erb'
   owner 'looker'
   group 'looker'
@@ -32,5 +29,5 @@ service 'looker' do
   stop_command "su looker -c 'cd ~looker/looker && ./looker stop'"
   status_command "su looker -c 'cd ~looker/looker && ./looker status'"
   supports :restart => true, :status => true
-  subscribes :notifications, looker_cfg
+  subscribes :notifications, looker_cfg_file
 end

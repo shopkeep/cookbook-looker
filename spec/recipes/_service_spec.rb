@@ -4,6 +4,7 @@ describe 'looker::_service' do
 
   let(:chef_run) do 
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
+      node.set['looker']['run_dir'] = "#{LOOKER_HOME}/looker"
       node.set['looker']['startup_args'] = '--ssl-keystore=/foo/bar.jks'
     end.converge(described_recipe)
   end
