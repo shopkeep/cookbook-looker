@@ -7,14 +7,13 @@ describe 'looker::_install' do
   s3_jar_file = "#{s3_url}/bar/looker-latest.jar"
 
   looker_run_dir = "#{LOOKER_HOME}/looker"
-  looker_cfg = "#{looker_run_dir}/lookerstart.cfg"
   startup_script = "#{looker_run_dir}/looker"
   jar_file = "#{looker_run_dir}/looker.jar"
 
   let(:chef_run) do 
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
       node.set['looker']['home'] = LOOKER_HOME
-      node.set['looker']['run_dir'] = "#{LOOKER_HOME}/looker"
+      node.set['looker']['run_dir'] = looker_run_dir
       node.set['looker']['startup_script'] = s3_startup_script
       node.set['looker']['jar_file'] = s3_jar_file
     end.converge(described_recipe) 
