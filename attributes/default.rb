@@ -1,3 +1,6 @@
 default['looker']['home'] = '/home/looker'
 
-default['looker']['file_cookbook'] = 'looker' # Cookbook where looker init script & jar are located
+default['looker']['s3']['url'] = ''
+
+default['looker']['s3']['startup_script'] = ''
+default['looker']['s3']['jar_file'] = ''

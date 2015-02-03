@@ -8,27 +8,32 @@
 #
 
 looker_home = node['looker']['home']
-looker_init_script = "#{looker_home}/looker/looker"
+looker_run_dir = "#{looker_home}/looker"
+
+looker_s3_url = node['looker']['s3']['url']
+
+startup_script = "#{looker_run_dir}/looker"
+jar_file = "#{looker_run_dir}/looker.jar"
 
 directory "#{looker_home}/looker" do
   owner 'looker'
   group 'looker'
 end
 
-cookbook_file looker_init_script do
-  source 'looker'
-  cookbook node['looker']['file_cookbook']
+s3_file startup_script do
+  remote_path node['looker']['s3']['startup_script']
+  s3_url looker_s3_url
   owner 'looker'
   group 'looker'
   mode 0750
-  action :create_if_missing
+  not_if { ::File.exists?(startup_script) }
 end
 
-cookbook_file "#{looker_home}/looker/looker.jar" do
-  source 'looker.jar'
-  cookbook node['looker']['file_cookbook']
+s3_file jar_file do
+  remote_path node['looker']['s3']['jar_file']
+  s3_url looker_s3_url
   owner 'looker'
   group 'looker'
   mode 0750
-  action :create_if_missing
+  not_if { ::File.exists?(jar_file) }
 end
