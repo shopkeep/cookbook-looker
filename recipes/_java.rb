@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: looker
-# Recipe:: default
+# Recipe:: _java
 #
 # Copyright (C) 2015 Shopkeep
 #

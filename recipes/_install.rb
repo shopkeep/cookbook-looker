@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: looker
-# Recipe:: default
+# Recipe:: _install
 #
 # Copyright (C) 2015 Shopkeep
 #
@@ -10,15 +10,16 @@
 looker_home = node['looker']['home']
 looker_run_dir = "#{looker_home}/looker"
 
-startup_script = "#{looker_run_dir}/looker"
-jar_file = "#{looker_run_dir}/looker.jar"
+looker_cfg = "#{looker_run_dir}/lookerstart.cfg"
+local_startup_script = "#{looker_run_dir}/looker"
+local_jar_file = "#{looker_run_dir}/looker.jar"
 
 directory "#{looker_home}/looker" do
   owner 'looker'
   group 'looker'
 end
 
-remote_file startup_script do
+remote_file local_startup_script do
   source node['looker']['startup_script']
   owner 'looker'
   group 'looker'
@@ -26,7 +27,7 @@ remote_file startup_script do
   action :create_if_missing
 end
 
-remote_file jar_file do
+remote_file local_jar_file do
   source node['looker']['jar_file']
   owner 'looker'
   group 'looker'

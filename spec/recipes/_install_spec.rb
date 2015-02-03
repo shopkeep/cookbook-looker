@@ -1,12 +1,13 @@
 require_relative '../spec_helper'
 
 
-describe 'looker::_files' do
-  s3_url = 'https://s3.amazonaws.com/download.looker.com'
-  s3_startup_script = "#{s3_url}/aeHee2HiNeekoh3uIu6hec3W/looker"
-  s3_jar_file = "#{s3_url}/aeHee2HiNeekoh3uIu6hec3W/looker-latest.jar"
+describe 'looker::_install' do
+  s3_url = 'https://s3.amazonaws.com/example'
+  s3_startup_script = "#{s3_url}/foo/looker"
+  s3_jar_file = "#{s3_url}/bar/looker-latest.jar"
 
   looker_run_dir = "#{LOOKER_HOME}/looker"
+  looker_cfg = "#{looker_run_dir}/lookerstart.cfg"
   startup_script = "#{looker_run_dir}/looker"
   jar_file = "#{looker_run_dir}/looker.jar"
 
