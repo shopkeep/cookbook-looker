@@ -1,6 +1,6 @@
 default['looker']['home'] = '/home/looker'
 
-default['looker']['s3']['url'] = ''
+default['looker']['startup_script'] = ''
+default['looker']['jar_file'] = ''
 
-default['looker']['s3']['startup_script'] = ''
-default['looker']['s3']['jar_file'] = ''
+default['java']['oracle']['accept_oracle_download_terms'] = true

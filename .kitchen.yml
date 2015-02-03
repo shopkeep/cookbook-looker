@@ -13,5 +13,9 @@ platforms:
 suites:
   - name: default
     run_list:
+      - 'apt'
       - 'looker'
     attributes:
+      looker:
+        startup_script: 'https://s3.amazonaws.com/download.looker.com/aeHee2HiNeekoh3uIu6hec3W/looker'
+        jar_file: 'https://s3.amazonaws.com/download.looker.com/aeHee2HiNeekoh3uIu6hec3W/looker-latest.jar'

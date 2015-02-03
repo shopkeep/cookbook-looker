@@ -8,8 +8,8 @@
 #
 
 service 'looker' do
-  action [ :enable, :start ]
-  init_command "su looker -c 'cd ~looker/looker && ./looker start'"
+  action :start
+  start_command "su looker -c 'cd ~looker/looker && ./looker start'"
   restart_command "su looker -c 'cd ~looker/looker && ./looker restart'"
   stop_command "su looker -c 'cd ~looker/looker && ./looker stop'"
   status_command "su looker -c 'cd ~looker/looker && ./looker status'"
