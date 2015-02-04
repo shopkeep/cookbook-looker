@@ -1,6 +1,6 @@
 require_relative '../spec_helper'
 
-describe 'looker:_files' do
+describe 'looker:_install' do
 
   looker_run_dir = '/home/looker/looker'
 

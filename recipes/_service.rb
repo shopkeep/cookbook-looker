@@ -8,7 +8,7 @@
 #
 #
 
-looker_cfg_file = "#{node['looker']['run_dir']}/lookerstart.cfg"
+looker_cfg_file = node['looker']['local']['cfg_file']
 
 template looker_cfg_file do
   source 'lookerstart.cfg.erb'

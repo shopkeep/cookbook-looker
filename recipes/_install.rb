@@ -7,14 +7,12 @@
 # All rights reserved - Do Not Redistribute
 #
 
-looker_run_dir = node['looker']['run_dir']
-
-directory looker_run_dir do
+directory node['looker']['run_dir'] do
   owner 'looker'
   group 'looker'
 end
 
-remote_file "#{looker_run_dir}/looker" do
+remote_file node['looker']['local']['startup_script'] do
   source node['looker']['startup_script']
   owner 'looker'
   group 'looker'
@@ -22,7 +20,7 @@ remote_file "#{looker_run_dir}/looker" do
   action :create_if_missing
 end
 
-remote_file "#{looker_run_dir}/looker.jar" do
+remote_file node['looker']['local']['jar_file'] do
   source node['looker']['jar_file']
   owner 'looker'
   group 'looker'
