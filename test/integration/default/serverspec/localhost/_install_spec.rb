@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 describe 'looker:_install' do
 
-  looker_run_dir = '/home/looker/looker'
+  looker_run_dir = "#{LOOKER_HOME}/looker"
 
   describe group('looker') do
     it { should exist }
