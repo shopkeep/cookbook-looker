@@ -7,12 +7,27 @@
 # All rights reserved - Do Not Redistribute
 #
 
+looker_home = node['looker']['home']
+looker_run_dir = node['looker']['run_dir']
+
+local_startup_script = "#{looker_run_dir}/looker"
+local_jar_file = "#{looker_run_dir}/looker.jar"
+
+group 'looker'
+
+user 'looker' do
+  gid 'looker'
+  home looker_home
+  shell '/bin/sh'
+  supports :manage_home => true
+end
+
 directory node['looker']['run_dir'] do
   owner 'looker'
   group 'looker'
 end
 
-remote_file node['looker']['local']['startup_script'] do
+remote_file local_startup_script do
   source node['looker']['startup_script']
   owner 'looker'
   group 'looker'
@@ -20,7 +35,7 @@ remote_file node['looker']['local']['startup_script'] do
   action :create_if_missing
 end
 
-remote_file node['looker']['local']['jar_file'] do
+remote_file local_jar_file do
   source node['looker']['jar_file']
   owner 'looker'
   group 'looker'

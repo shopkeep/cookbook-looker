@@ -12,13 +12,23 @@ describe 'looker::_install' do
 
   let(:chef_run) do 
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
-      node.set['looker']['home'] = LOOKER_HOME
       node.set['looker']['run_dir'] = looker_run_dir
-      node.set['looker']['local']['startup_script'] = local_startup_script
-      node.set['looker']['local']['jar_file'] = local_jar_file
       node.set['looker']['startup_script'] = s3_startup_script
       node.set['looker']['jar_file'] = s3_jar_file
     end.converge(described_recipe) 
+  end
+
+  it 'Creates the looker user' do
+    expect(chef_run).to create_user('looker').with(
+      'supports' => { :manage_home => true },
+      'home' => LOOKER_HOME,
+      'shell' => '/bin/sh',
+      'gid' => 'looker'
+    )
+  end
+
+  it 'Creates the looger group' do
+    expect(chef_run).to create_group('looker')
   end
 
   it 'Creates the directory "looker" inside the looker users homedir' do
