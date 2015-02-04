@@ -18,7 +18,7 @@ describe 'looker::_service' do
     )
   end
 
-  it 'Creates the looker service' do
+  it 'Starts the looker service' do
     expect(chef_run).to start_service('looker')
   end
       

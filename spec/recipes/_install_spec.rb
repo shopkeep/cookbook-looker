@@ -18,6 +18,10 @@ describe 'looker::_install' do
     end.converge(described_recipe) 
   end
 
+  it 'Creates the looger group' do
+    expect(chef_run).to create_group('looker')
+  end
+
   it 'Creates the looker user' do
     expect(chef_run).to create_user('looker').with(
       'supports' => { :manage_home => true },
@@ -27,18 +31,14 @@ describe 'looker::_install' do
     )
   end
 
-  it 'Creates the looger group' do
-    expect(chef_run).to create_group('looker')
-  end
-
-  it 'Creates the directory "looker" inside the looker users homedir' do
+  it 'Creates the looker running directory' do
     expect(chef_run).to create_directory(looker_run_dir).with(
       'owner' => 'looker',
       'group' => 'looker'
     )
   end
 
-  it 'Gets startup script from s3' do
+  it 'Gets the looker startup script from s3' do
     expect(chef_run).to create_remote_file_if_missing(local_startup_script).with(
       source: s3_startup_script,
       owner: 'looker',
@@ -48,7 +48,7 @@ describe 'looker::_install' do
     )
   end
 
-  it 'Gets looker.jar from s3' do
+  it 'Gets the looker jar file from s3' do
     expect(chef_run).to create_remote_file_if_missing(local_jar_file).with(
       source: s3_jar_file,
       owner: 'looker',
