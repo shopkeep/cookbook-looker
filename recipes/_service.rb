@@ -7,7 +7,9 @@
 # All rights reserved - Do Not Redistribute
 #
 
-looker_cfg_file = "#{node['looker']['run_dir']}/lookerstart.cfg"
+looker_run_dir = node['looker']['run_dir']
+looker_cfg_file = "#{looker_run_dir}/lookerstart.cfg"
+looker_cmd = "su looker -c 'cd #{looker_run_dir} && ./looker"
 
 template looker_cfg_file do
   source 'lookerstart.cfg.erb'
@@ -21,12 +23,13 @@ template looker_cfg_file do
   notifies :restart, 'service[looker]'
 end
 
+
 service 'looker' do
   action :start
-  start_command "su looker -c 'cd ~looker/looker && ./looker start'"
-  restart_command "su looker -c 'cd ~looker/looker && ./looker restart'"
-  stop_command "su looker -c 'cd ~looker/looker && ./looker stop'"
-  status_command "su looker -c 'cd ~looker/looker && ./looker status'"
+  start_command "#{looker_cmd} start'"
+  restart_command "#{looker_cmd} restart'"
+  stop_command "#{looker_cmd} stop'"
+  status_command "#{looker_cmd} status'"
   supports :restart => true, :status => true
   subscribes :notifications, looker_cfg_file
 end
