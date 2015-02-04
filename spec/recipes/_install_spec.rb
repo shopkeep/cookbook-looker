@@ -43,7 +43,8 @@ describe 'looker::_install' do
       source: s3_startup_script,
       owner: 'looker',
       group: 'looker',
-      mode: 0750
+      mode: 0750,
+      action: [ :create_if_missing ]
     )
   end
 
@@ -52,18 +53,9 @@ describe 'looker::_install' do
       source: s3_jar_file,
       owner: 'looker',
       group: 'looker',
-      mode: 0750
+      mode: 0750,
+      action: [ :create_if_missing ]
     )
-  end
-
-  %w( local_startup_script local_jar_file ).each do |download|
-    it "does not redownload #{download} from s3 if it exists" do
-      allow(File).to receive(:exists?).and_call_original
-      allow(File).to receive(:exists?)
-        .with(download)
-        .and_return(true)
-      expect(chef_run).to_not create_remote_file_if_missing(download)
-    end
   end
 
 end
