@@ -15,7 +15,6 @@ platforms:
 suites:
   - name: default
     run_list:
-      - 'apt'
       - 'looker'
     attributes:
       looker:

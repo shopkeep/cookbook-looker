@@ -9,6 +9,7 @@
 
 node.default['looker']['run_dir'] = "#{node['looker']['home']}/looker"
 
+include_recipe 'apt'
 include_recipe 'looker::_java'
 include_recipe 'looker::_install'
 include_recipe 'looker::_service'
