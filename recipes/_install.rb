@@ -28,7 +28,7 @@ directory node['looker']['run_dir'] do
 end
 
 remote_file local_startup_script do
-  source node['looker']['startup_script']
+  source node['looker']['startup_script_url']
   owner 'looker'
   group 'looker'
   mode 0750
@@ -36,7 +36,7 @@ remote_file local_startup_script do
 end
 
 remote_file local_jar_file do
-  source node['looker']['jar_file']
+  source node['looker']['jar_file_url']
   owner 'looker'
   group 'looker'
   mode 0750

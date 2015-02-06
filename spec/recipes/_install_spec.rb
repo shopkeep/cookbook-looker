@@ -13,8 +13,8 @@ describe 'looker::_install' do
   let(:chef_run) do 
     ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
       node.set['looker']['run_dir'] = looker_run_dir
-      node.set['looker']['startup_script'] = startup_script
-      node.set['looker']['jar_file'] = jar_file
+      node.set['looker']['startup_script_url'] = startup_script
+      node.set['looker']['jar_file_url'] = jar_file
     end.converge(described_recipe) 
   end
 

@@ -18,5 +18,5 @@ suites:
       - 'looker'
     attributes:
       looker:
-        startup_script: ENV['LOOKER_STARTUP_SCRIPT_URL']
-        jar_file: ENV['LOOKER_JAR_URL']
+        startup_script_url: ENV['LOOKER_STARTUP_SCRIPT_URL']
+        jar_file_url: ENV['LOOKER_JAR_URL']
