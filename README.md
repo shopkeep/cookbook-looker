@@ -44,7 +44,7 @@ Ubuntu 14.04
 
 ## Usage
 
-*NOTE:* ['looker']['startup_script_url'] and ['looker']['jar_file_url'] must be set in order for this cookbook to run.
+**NOTE:** **['looker']['startup_script_url']** and **['looker']['jar_file_url']** must be set in order for this cookbook to run.
 
 ### looker::default
 
