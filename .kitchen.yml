@@ -18,5 +18,5 @@ suites:
       - 'looker'
     attributes:
       looker:
-        startup_script: 'https://s3.amazonaws.com/download.looker.com/aeHee2HiNeekoh3uIu6hec3W/looker'
-        jar_file: 'https://s3.amazonaws.com/download.looker.com/aeHee2HiNeekoh3uIu6hec3W/looker-latest.jar'
+        startup_script: ENV['LOOKER_STARTUP_SCRIPT_URL']
+        jar_file: ENV['LOOKER_JAR_URL']
