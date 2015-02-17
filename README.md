@@ -35,6 +35,12 @@ Ubuntu 14.04
     <td><tt>''</td></tt>
   </tr>
   <tr>
+    <td><tt>['looker']['startup_args']</tt></td>
+    <td>String</td>
+    <td>Contents of ['looker']['home']/looker/lookerstart.cfg</td>
+    <td><tt>''</td></tt>
+  </tr>
+  <tr>
     <td><tt>['java']['oracle']['accept_oracle_download_terms']</tt></td>
     <td>Boolean</td>
     <td>Looker requires Oracle Java, do you accept the terms?</td>
