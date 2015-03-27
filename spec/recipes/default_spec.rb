@@ -5,7 +5,8 @@ describe 'looker::default' do
   let(:url) { 'https://s3.amazonaws.com/example' }
   let(:startup_script) { "#{url}/foo/looker" }
   let(:jar_file) { "#{url}/bar/looker-latest.jar" }
-  let(:looker_run_dir) { "#{LOOKER_HOME}/looker" }
+  let(:looker_home) { '/home/looker' }
+  let(:looker_run_dir) { "#{looker_home}/looker" }
   let(:local_startup_script) { "#{looker_run_dir}/looker" }
   let(:local_jar_file) { "#{looker_run_dir}/looker.jar" }
   let(:java_args) { '--Xmx4096m --Xms2048m' }
@@ -26,7 +27,7 @@ describe 'looker::default' do
   it 'Creates the looker user' do
     expect(chef_run).to create_user('looker').with(
       'supports' => { manage_home: true },
-      'home' => LOOKER_HOME,
+      'home' => looker_home,
       'shell' => '/bin/sh',
       'gid' => 'looker'
     )
