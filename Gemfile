@@ -6,7 +6,7 @@ gem 'berkshelf'
 #
 # group :development do
 #   gem "berkshelf", github: "berkshelf/berkshelf"
-#   gem "vagrant", github: "mitchellh/vagrant", tag: "v1.6.3"
+#   gem "vagrant", github: "mitchellh/vagrant", tag: "v1.5.2"
 # end
 #
 # group :plugins do
@@ -14,9 +14,5 @@ gem 'berkshelf'
 #   gem "vagrant-omnibus", github: "schisamo/vagrant-omnibus"
 # end
 
-group :test do
-  gem 'chefspec'
-  gem 'kitchen-vagrant'
-  gem 'serverspec'
-  gem 'test-kitchen'
-end
+gem 'test-kitchen'
+gem 'kitchen-vagrant'
