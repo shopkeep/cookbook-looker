@@ -19,7 +19,7 @@ user 'looker' do
   gid 'looker'
   home looker_home
   shell '/bin/sh'
-  supports :manage_home => true
+  supports manage_home: true
 end
 
 directory node['looker']['run_dir'] do

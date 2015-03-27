@@ -17,12 +17,12 @@ template looker_cfg_file do
   group 'looker'
   mode 0640
   variables(
-    args: node['looker']['startup_args']
+    looker_args: node['looker']['LOOKERARGS'],
+    java_args: node['looker']['JAVAARGS']
   )
   action :create
   notifies :restart, 'service[looker]'
 end
-
 
 service 'looker' do
   action :start
@@ -30,6 +30,6 @@ service 'looker' do
   restart_command "#{looker_cmd} restart'"
   stop_command "#{looker_cmd} stop'"
   status_command "#{looker_cmd} status'"
-  supports :restart => true, :status => true
+  supports restart: true, status: true
   subscribes :notifications, looker_cfg_file
 end

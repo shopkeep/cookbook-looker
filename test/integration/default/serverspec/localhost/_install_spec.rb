@@ -1,8 +1,7 @@
 require_relative '../spec_helper'
 
 describe 'looker:_install' do
-
-  looker_run_dir = "#{LOOKER_HOME}/looker"
+  let(:looker_run_dir) { "#{LOOKER_HOME}/looker" }
 
   describe group('looker') do
     it { should exist }
@@ -38,5 +37,4 @@ describe 'looker:_install' do
     it { should be_grouped_into 'looker' }
     it { should be_mode 750 }
   end
-
 end
