@@ -35,9 +35,15 @@ Ubuntu 14.04
     <td><tt>''</td></tt>
   </tr>
   <tr>
-    <td><tt>['looker']['startup_args']</tt></td>
+    <td><tt>['looker']['LOOKERARGS']</tt></td>
     <td>String</td>
-    <td>Contents of ['looker']['home']/looker/lookerstart.cfg</td>
+    <td>LOOKERARGS in ['looker']['home']/looker/lookerstart.cfg</td>
+    <td><tt>''</td></tt>
+  </tr>
+  <tr>
+    <td><tt>['looker']['JAVAARGS']</tt></td>
+    <td>String</td>
+    <td>JAVAARGS in ['looker']['home']/looker/lookerstart.cfg</td>
     <td><tt>''</td></tt>
   </tr>
   <tr>
