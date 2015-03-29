@@ -83,8 +83,16 @@ describe 'looker::default' do
         expect(chef_run).to render_file('/etc/chef/ohai_plugins/looker.rb')
       end
 
-      it 'Reloads ohai after rendering looker.rb' do
-        expect(ohai_plugin).to notify('ohai[reload_looker]').immediately
+      it 'Notify ohai to reload after rendering looker.rb' do
+        expect(ohai_plugin).to notify('ohai[reload_looker]')
+          .immediately.to(:reload)
+      end
+
+      it 'Does not reload ohai unless we have modified looker.rb' do
+        expect(chef_run).to_not reload_ohai('reload_looker').with(
+          plugin: 'looker',
+          ation: :nothing
+        )
       end
 
       it 'Includes the ohai cookbook' do
