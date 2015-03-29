@@ -20,63 +20,44 @@ describe 'looker::default' do
     end.converge(described_recipe)
   end
 
-  it 'Creates the looker group' do
-    expect(chef_run).to create_group('looker')
-  end
-
-  it 'Creates the looker user' do
-    expect(chef_run).to create_user('looker').with(
-      'supports' => { manage_home: true },
-      'home' => looker_home,
-      'shell' => '/bin/sh',
-      'gid' => 'looker'
-    )
-  end
-
-  it 'Creates the looker running directory' do
-    expect(chef_run).to create_directory(looker_run_dir).with(
-      'owner' => 'looker',
-      'group' => 'looker'
-    )
-  end
-
-  it 'Gets the looker startup script from remote' do
-    expect(chef_run).to create_remote_file_if_missing(local_startup_script).with(
-      source: startup_script,
-      owner: 'looker',
-      group: 'looker',
-      mode: 0750,
-      action: [:create_if_missing]
-    )
-  end
-
-  it 'Gets the looker jar file from remote' do
-    expect(chef_run).to create_remote_file_if_missing(local_jar_file).with(
-      source: jar_file,
-      owner: 'looker',
-      group: 'looker',
-      mode: 0750,
-      action: [:create_if_missing]
-    )
-  end
-
-  it 'installs oracle java 7' do
-    expect(chef_run).to include_recipe('java')
-  end
-
-  context 'When running with custom LOOKERARGS' do
-    let(:chef_run) do
-      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
-        node.set['looker']['run_dir'] = looker_run_dir
-        node.set['looker']['startup_script_url'] = startup_script
-        node.set['looker']['jar_file_url'] = jar_file
-        node.set['looker']['LOOKERARGS'] = '--ssl-keystore=/foo/bar.jks'
-      end.converge(described_recipe)
+  context 'When installing looker' do
+    it 'Creates the looker group' do
+      expect(chef_run).to create_group('looker')
     end
 
-    it 'Creates lookerstart.cfg with the correct content' do
-      expect(chef_run).to render_file(lookerstart).with_content(
-        %r{LOOKERARGS=\"--ssl-keystore=/foo/bar\.jks\"}
+    it 'Creates the looker user' do
+      expect(chef_run).to create_user('looker').with(
+        'supports' => { manage_home: true },
+        'home' => looker_home,
+        'shell' => '/bin/sh',
+        'gid' => 'looker'
+      )
+    end
+
+    it 'Creates the looker running directory' do
+      expect(chef_run).to create_directory(looker_run_dir).with(
+        'owner' => 'looker',
+        'group' => 'looker'
+      )
+    end
+
+    it 'Gets the looker startup script from remote' do
+      expect(chef_run).to create_remote_file_if_missing(local_startup_script).with(
+        source: startup_script,
+        owner: 'looker',
+        group: 'looker',
+        mode: 0750,
+        action: [:create_if_missing]
+      )
+    end
+
+    it 'Gets the looker jar file from remote' do
+      expect(chef_run).to create_remote_file_if_missing(local_jar_file).with(
+        source: jar_file,
+        owner: 'looker',
+        group: 'looker',
+        mode: 0750,
+        action: [:create_if_missing]
       )
     end
 
@@ -90,9 +71,46 @@ describe 'looker::default' do
         "template[#{lookerstart}]"
       )
     end
+
+    it 'installs oracle java 7' do
+      expect(chef_run).to include_recipe('java')
+    end
+
+    context 'Installs the looker ohai plugin' do
+      let(:ohai_plugin) { chef_run.template('/etc/chef/ohai_plugins/looker.rb') }
+
+      it 'Renders looker.rb' do
+        expect(chef_run).to render_file('/etc/chef/ohai_plugins/looker.rb')
+      end
+
+      it 'Reloads ohai after rendering looker.rb' do
+        expect(ohai_plugin).to notify('ohai[reload_looker]').immediately
+      end
+
+      it 'Includes the ohai cookbook' do
+        expect(chef_run).to include_recipe('ohai::default')
+      end
+    end
   end
 
-  context 'When running with custom JAVAARGS' do
+  context 'When installing with custom LOOKERARGS' do
+    let(:chef_run) do
+      ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
+        node.set['looker']['run_dir'] = looker_run_dir
+        node.set['looker']['startup_script_url'] = startup_script
+        node.set['looker']['jar_file_url'] = jar_file
+        node.set['looker']['LOOKERARGS'] = '--ssl-keystore=/foo/bar.jks'
+      end.converge(described_recipe)
+    end
+
+    it 'Sets LOOKERARGS in lookerstart.cfg' do
+      expect(chef_run).to render_file(lookerstart).with_content(
+        %r{LOOKERARGS=\"--ssl-keystore=/foo/bar\.jks\"}
+      )
+    end
+  end
+
+  context 'When installing with custom JAVAARGS' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
         node.set['looker']['run_dir'] = looker_run_dir
@@ -102,14 +120,14 @@ describe 'looker::default' do
       end.converge(described_recipe)
     end
 
-    it 'Adds JAVAARGS to lookerstart.cfg' do
+    it 'Sets JAVAARGS in lookerstart.cfg' do
       expect(chef_run).to render_file(lookerstart).with_content(
         /JAVAARGS=\"#{java_args}\"/
       )
     end
   end
 
-  context 'with both custom JAVAARGS and LOOKERARGS' do
+  context 'With installing with custom JAVAARGS and LOOKERARGS' do
     let(:chef_run) do
       ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
         node.set['looker']['run_dir'] = looker_run_dir
