@@ -70,6 +70,18 @@ Include `looker` in your node's `run_list`:
 }
 ```
 
+## Testing
+
+```ruby
+bundle install
+
+# Rubocop, Foodcritic, Chefspec
+bundle exec rake
+
+# Test Kitchen
+bundle exec kitchen test
+```
+
 ## License and Authors
 
 Author:: James Awesome (awesome@shopkeep.com)
