@@ -49,4 +49,8 @@ describe 'looker:_install' do
   describe service('looker') do
     it { should be_running }
   end
+
+  it 'Has an ohai attribute for looker/version' do
+    expect(OHAI['looker']['version']).to match(/\d+\.\d+\.\d+/)
+  end
 end
