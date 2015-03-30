@@ -18,5 +18,6 @@ suites:
       - 'looker'
     attributes:
       looker:
-        startup_script_url: ENV['LOOKER_STARTUP_SCRIPT_URL']
-        jar_file_url: ENV['LOOKER_JAR_URL']
+        # Get these from your looker account Rep
+        startup_script_url: <%= ENV['LOOKER_STARTUP_SCRIPT_URL'] %>
+        jar_file_url: <%= ENV['LOOKER_JAR_URL'] %>
