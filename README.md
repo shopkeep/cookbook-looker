@@ -56,7 +56,7 @@ Ubuntu 14.04
 
 ## Usage
 
-**NOTE:** **['looker']['startup_script_url']** and **['looker']['jar_file_url']** must be set in order for this cookbook to run.
+**NOTE:** **node['looker']['startup_script_url']** and **node['looker']['jar_file_url']** must be set in order for this cookbook to run.
 
 ### looker::default
 
@@ -71,6 +71,8 @@ Include `looker` in your node's `run_list`:
 ```
 
 ## Testing
+
+**NOTE**: Ensure to override node['looker']['startup_script_url'] and node['looker']['jar_file_url'] via environment or via .kitchen.local.yml. If you are unsure of the URL's to use please speak to your looker account rep.
 
 ```ruby
 bundle install
