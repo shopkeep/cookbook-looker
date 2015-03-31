@@ -72,8 +72,23 @@ describe 'looker::default' do
       )
     end
 
-    it 'installs oracle java 7' do
+    it 'installs java' do
       expect(chef_run).to include_recipe('java')
+    end
+
+    context 'when install_java is set to false' do
+      let(:chef_run) do
+        ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04') do |node|
+          node.set['looker']['run_dir'] = looker_run_dir
+          node.set['looker']['startup_script_url'] = startup_script
+          node.set['looker']['jar_file_url'] = jar_file
+          node.set['looker']['install_java'] = false
+        end.converge(described_recipe)
+      end
+
+      it 'does not installs java' do
+        expect(chef_run).to_not include_recipe('java')
+      end
     end
 
     context 'Installs the looker ohai plugin' do

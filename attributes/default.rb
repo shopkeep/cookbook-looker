@@ -1,4 +1,4 @@
-default['java']['oracle']['accept_oracle_download_terms'] = true
+default['looker']['install_java'] = true
 
 default['looker']['home'] = '/home/looker'
 
