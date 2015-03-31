@@ -49,7 +49,7 @@ Ubuntu 14.04
   <tr>
     <td><tt>['looker']['install_java']</tt></td>
     <td>Boolean</td>
-    <td>Installs oracle java 7. **NOTE:** By setting this to true you accept oracle download terms. See [cookbook/java](https://supermarket.chef.io/cookbooks/java) for details.</td>
+    <td>Installs oracle java 7. By setting this to true you accept oracle download terms. See <a href="https://supermarket.chef.io/cookbooks/java">cookbook/java</a> for details.</td>
     <td><tt>true</td></tt>
   </tr>
 </table>
