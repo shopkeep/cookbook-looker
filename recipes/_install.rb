@@ -22,6 +22,7 @@ user 'looker' do
   supports manage_home: true
 end
 
+# Create /home/looker
 directory node['looker']['run_dir'] do
   owner 'looker'
   group 'looker'

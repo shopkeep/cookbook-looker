@@ -7,3 +7,5 @@ default['looker']['jar_file_url'] = ''
 
 default['looker']['LOOKERARGS'] = nil
 default['looker']['JAVAARGS'] = nil
+
+default['looker']['newrelic']['app_name'] = 'Looker'
