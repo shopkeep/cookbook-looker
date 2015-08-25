@@ -20,8 +20,10 @@ user 'looker' do
   home looker_home
   shell '/bin/sh'
   supports manage_home: true
+  password 'looker'
 end
 
+# Create /home/looker
 directory node['looker']['run_dir'] do
   owner 'looker'
   group 'looker'

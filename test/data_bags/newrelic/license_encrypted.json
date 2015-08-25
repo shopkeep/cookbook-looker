@@ -1,0 +1,9 @@
+{
+  "id": "license",
+  "key": {
+    "encrypted_data": "18QbGtb46HgTwslwbO2Css8TYCETeU30IRjMxTNAiBImSdbKUnrUX9JcbtQE\nllU5osNfVR3eVAB79SaWFjMkgw==\n",
+    "iv": "rTUmtYlHoX674wsNdxbknQ==\n",
+    "version": 1,
+    "cipher": "aes-256-cbc"
+  }
+}
