@@ -30,6 +30,7 @@ service 'looker' do
   restart_command "#{looker_cmd} restart'"
   stop_command "#{looker_cmd} stop'"
   status_command "#{looker_cmd} status'"
-  supports restart: true, status: true
+  provider Chef::Provider::Service::Init
+  supports restart: true, status: true, stop: true
   subscribes :notifications, looker_cfg_file
 end
