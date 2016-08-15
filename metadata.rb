@@ -8,4 +8,5 @@ version          '0.2.5'
 
 depends 'apt'
 depends 'java'
+depends 'chef-sugar'
 depends 'ohai'
