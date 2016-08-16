@@ -12,7 +12,7 @@ end
 
 require 'ohai'
 
-PLUGIN_PATH = '/etc/chef/ohai_plugins'
+PLUGIN_PATH = '/etc/chef/ohai_plugins'.freeze
 Ohai::Config[:plugin_path] << PLUGIN_PATH
 o = Ohai::System.new
 o.all_plugins

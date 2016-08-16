@@ -10,6 +10,6 @@
 if node['looker']['install_java']
   node.set['java']['oracle']['accept_oracle_download_terms'] = true
   node.set['java']['install_flavor'] = 'oracle'
-  node.set['java']['jdk_version'] = 7
+  node.set['java']['jdk_version'] = 8
   include_recipe('java')
 end
