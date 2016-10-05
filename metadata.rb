@@ -4,7 +4,7 @@ maintainer_email 'awesome@shopkeep.com'
 license          'All rights reserved'
 description      'Installs/Configures looker'
 long_description 'Installs/Configures looker'
-version          '0.2.5'
+version          '0.2.10'
 
 depends 'apt'
 depends 'java'
