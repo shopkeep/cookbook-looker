@@ -46,11 +46,11 @@ describe 'looker::default' do
     it { should be_mode 640 }
   end
 
-  describe service('looker') do
-    it { should be_running }
+  describe command('/bin/sh -c "/home/looker/looker/looker status"') do
+    its(:stdout) { should match /Status:Looker Web Application running/ }
   end
 
-  it 'Generates an ohai attribute for looker/version' do
-    expect(OHAI['looker']['version']).to match(/\d+\.\d+\.\d+/)
+  describe service('looker'), :if => host_inventory['platform_version'] == '14.04' do
+    it { should be_running }
   end
 end
