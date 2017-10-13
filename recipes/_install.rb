@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Cookbook Name:: looker
 # Recipe:: _install
@@ -31,7 +33,7 @@ remote_file local_startup_script do
   source node['looker']['startup_script_url']
   owner 'looker'
   group 'looker'
-  mode 0750
+  mode 0o750
   action :create_if_missing
 end
 
@@ -39,6 +41,6 @@ remote_file local_jar_file do
   source node['looker']['jar_file_url']
   owner 'looker'
   group 'looker'
-  mode 0750
+  mode 0o750
   action :create_if_missing
 end

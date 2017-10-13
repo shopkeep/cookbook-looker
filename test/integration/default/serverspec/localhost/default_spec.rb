@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
-describe 'looker::default' do
+describe 'looker::default' do # rubocop:disable BlockLength
   looker_home = '/home/looker'
   looker_run_dir = "#{looker_home}/looker"
 
@@ -47,10 +49,10 @@ describe 'looker::default' do
   end
 
   describe command('/bin/sh -c "/home/looker/looker/looker status"') do
-    its(:stdout) { should match /Status:Looker Web Application running/ }
+    its(:stdout) { should match 'Status:Looker Web Application running' }
   end
 
-  describe service('looker'), :if => host_inventory['platform_version'] == '14.04' do
+  describe service('looker'), if: host_inventory['platform_version'] == '14.04' do
     it { should be_running }
   end
 end

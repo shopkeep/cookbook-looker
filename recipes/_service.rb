@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 #
 # Cookbook Name:: looker
 # Recipe:: _service
@@ -15,7 +17,7 @@ template looker_cfg_file do
   source 'lookerstart.cfg.erb'
   owner 'looker'
   group 'looker'
-  mode 0640
+  mode 0o640
   variables(
     looker_args: node['looker']['LOOKERARGS'],
     java_args: node['looker']['JAVAARGS']

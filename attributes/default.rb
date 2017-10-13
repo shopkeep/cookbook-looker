@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 default['looker']['install_java'] = true
 
 default['looker']['home'] = '/home/looker'
