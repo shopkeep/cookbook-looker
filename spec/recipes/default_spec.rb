@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require_relative '../spec_helper'
 
-describe 'looker::default' do
-  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '14.04').converge(described_recipe) }
+describe 'looker::default' do # rubocop:disable BlockLength
+  let(:chef_run) { ChefSpec::SoloRunner.new(platform: 'ubuntu', version: '16.04').converge(described_recipe) }
   let(:url) { 'https://s3.amazonaws.com/example' }
   let(:startup_script) { "#{url}/foo/looker" }
   let(:jar_file) { "#{url}/bar/looker-latest.jar" }
@@ -20,14 +22,14 @@ describe 'looker::default' do
     end.converge(described_recipe)
   end
 
-  context 'When installing looker' do
+  context 'When installing looker' do # rubocop:disable BlockLength
     it 'Creates the looker group' do
       expect(chef_run).to create_group('looker')
     end
 
     it 'Creates the looker user' do
       expect(chef_run).to create_user('looker').with(
-        'supports' => { manage_home: true },
+        'manage_home' => true,
         'home' => looker_home,
         'shell' => '/bin/sh',
         'gid' => 'looker'
@@ -46,7 +48,7 @@ describe 'looker::default' do
         source: startup_script,
         owner: 'looker',
         group: 'looker',
-        mode: 0750,
+        mode: 0o750,
         action: [:create_if_missing]
       )
     end
@@ -56,7 +58,7 @@ describe 'looker::default' do
         source: jar_file,
         owner: 'looker',
         group: 'looker',
-        mode: 0750,
+        mode: 0o750,
         action: [:create_if_missing]
       )
     end
@@ -88,30 +90,6 @@ describe 'looker::default' do
 
       it 'does not installs java' do
         expect(chef_run).to_not include_recipe('java')
-      end
-    end
-
-    context 'Installs the looker ohai plugin' do
-      let(:ohai_plugin) { chef_run.template('/etc/chef/ohai_plugins/looker.rb') }
-
-      it 'Renders looker.rb' do
-        expect(chef_run).to render_file('/etc/chef/ohai_plugins/looker.rb')
-      end
-
-      it 'Notify ohai to reload after rendering looker.rb' do
-        expect(ohai_plugin).to notify('ohai[reload_looker]')
-          .immediately.to(:reload)
-      end
-
-      it 'Does not reload ohai unless we have modified looker.rb' do
-        expect(chef_run).to_not reload_ohai('reload_looker').with(
-          plugin: 'looker',
-          ation: :nothing
-        )
-      end
-
-      it 'Includes the ohai cookbook' do
-        expect(chef_run).to include_recipe('ohai::default')
       end
     end
   end

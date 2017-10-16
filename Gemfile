@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 
 gem 'berkshelf'
@@ -14,6 +16,10 @@ gem 'berkshelf'
 #   gem "vagrant-omnibus", github: "schisamo/vagrant-omnibus"
 # end
 
-gem 'test-kitchen'
+gem 'chefspec'
+gem 'foodcritic'
 gem 'kitchen-vagrant'
-gem 'chef-sugar'
+gem 'minitar-cli'
+gem 'rake'
+gem 'rubocop'
+gem 'test-kitchen'
