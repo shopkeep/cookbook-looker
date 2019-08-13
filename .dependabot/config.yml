@@ -1,5 +1,4 @@
 version: 1
-.dependabot/config.yml
 update_configs:
   - package_manager: "ruby:bundler"
     directory: "/"
